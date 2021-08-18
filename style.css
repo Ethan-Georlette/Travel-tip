@@ -11,11 +11,11 @@
 
 body {
   background-color: rgb(0, 3, 34);
-  font-family: 'Montserrat-Regular'';
 }
 
 h1 {
   color: #fff;
+  font-family: 'Montserrat-Regular';
 }
 .container {
   margin: 1rem;
@@ -51,34 +51,31 @@ main {
   margin: 1rem 1rem;
 }
 
-.loc-table p {
-  display: flex;
-  flex-direction: column;
+#map {
+  height: 400px;
+  flex-basis: 60%;
+}
+
+.weather-container {
+  flex-basis: 40%;
+}
+/* footer style */
+
+table {
+  font-family: 'Montserrat-Regular';
+
+  border-spacing: 25px;
 }
 
 .loc-table span {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
 }
 
 .loc-table {
   display: flex;
-  flex-wrap: wrap;
-  width: 50%;
-  margin-left: 10px;
 }
-
-#map {
-  height: 400px;
-  flex-basis: 50%;
-}
-
-.locs {
-  flex-basis: 50%;
-}
-
-/* footer style */
 
 footer {
   margin: 1rem 1rem;
