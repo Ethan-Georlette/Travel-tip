@@ -25,9 +25,9 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
         })
 }
 
-function addMarker(loc) {
+function addMarker(lat,lng) {
     var marker = new google.maps.Marker({
-        position: loc,
+        position: {lat,lng},
         map: gMap,
         title: 'Hello World!'
     });
@@ -42,7 +42,7 @@ function panTo(lat, lng) {
 function onMapClick(ev) {
     console.log(ev.latLng);
     const latLng = ev.latLng
-    locService.getLocations(latLng)
+    locService.setLocations(latLng)
     //TODO save location 
     // {id, name, lat, lng, weather, createdAt, updatedAt}
     //+render table save to storage

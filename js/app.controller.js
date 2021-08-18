@@ -33,11 +33,12 @@ function onGetLocs() {
     locService.getLocs()
         .then(locs => {
             const strHtml=locs.map((loc,idx)=>{
+                console.log(loc);
                 return`<table>
                     <tr>
                         <td>${idx+1}</td>
                         <td>${loc.name}</td>
-                        <td onClick="onGo({lat:'${loc.lat}',loc:'${loc.lng}'})">GO</td>
+                        <td onClick="onPanTo(${loc.lat},${loc.lng})">GO</td>
                         <td onclick="onDelete(${loc.id})">delete</td>
                     </tr>
                 </table>`
@@ -54,16 +55,17 @@ function onGetUserPos() {
             document.querySelector('.user-pos').innerText =
                 `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`
                 mapService.panTo({lat:pos.coords.latitude,lng:pos.coords.longitude});
-                mapService.addMarker({lat:pos.coords.latitude,lng:pos.coords.longitude});
+                mapService.addMarker(pos.coords.latitude,pos.coords.longitud);
         })
         .catch(err => {
             console.log('err!!!', err);
         })
 }
 
-function onPanTo() {
+function onPanTo(lat,lng) {
     console.log('Panning the Map');
-    mapService.panTo(35.6895, 139.6917);
+    mapService.panTo(lat,lng);
+    mapService.addMarker(lat,lng);
 }
 
 function onSearch(ev){

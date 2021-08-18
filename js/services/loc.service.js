@@ -1,8 +1,11 @@
 import { storageService } from "./storage.service.js";
-
+// https://maps.googleapis.com/maps/api/geocode/json?[SEARCH]&key=AIzaSyCePfEK3bXc96ayT5UdPTba5hsEXq2xydE
+// SEARCH:
+// adress=adress
+//latlng=lat,lng
 export const locService = {
     getLocs,
-    getLocations
+    setLocations
 }
 
 const KEY = 'locsDB'
@@ -24,24 +27,18 @@ function getLocs() {
     });
 }
 
-function getLocations(location) {
-    var stringLoc = JSON.stringify(location.toJSON(), null, 2)
+function setLocations(location) {
+    var stringLoc = location.toJSON()
     const locObj = {
         name: prompt('enter location title'),
         lat: stringLoc.lat,
         lng: stringLoc.lng,
         cratedAt: Date.now()
     }
-
-    // if (!storageService.load(KEY)) {
-    //     locs.push(locObj)
-    //     storageService.save(KEY, locs)
-    // }
-    // else {
     locs.push(locObj)
     storageService.save(KEY, locs)
-    // }
 }
+
 
 
 //save to local storage
