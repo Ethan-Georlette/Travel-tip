@@ -36,7 +36,7 @@ function setLocations(location) {
                 name: prompt('enter location title'),
                 lat: stringLoc.lat,
                 lng: stringLoc.lng,
-                adress:res,
+                adress: res,
                 cratedAt: Date.now()
             }
             locs.push(locObj)
@@ -65,3 +65,10 @@ function getPosAdress(lat, lng) {
 
 
 //save to local storage
+
+function deleteLocation(locIdx) {
+    let idx = locs.findIndex(loc => loc.id = locIdx)
+
+    locs.splice(idx, 0)
+
+}
