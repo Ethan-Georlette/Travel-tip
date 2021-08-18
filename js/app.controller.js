@@ -7,7 +7,8 @@ window.onPanTo = onPanTo;
 window.onGetLocs = onGetLocs;
 window.onGetUserPos = onGetUserPos;
 window.onSearch = onSearch;
-window.onCopyUrl = onCopyUrl;
+window.onDelete = onDelete;
+// window.onCopyUrl = onCopyUrl;
 
 function onInit() {
     const urlSearchParams = new URLSearchParams(window.location.search);
@@ -54,6 +55,9 @@ function onGetLocs() {
             }).join('')
             document.querySelector('.locs').innerHTML = strHtml;
         })
+        .catch(err => {
+            document.querySelector('.locs').innerHTML = 'no locations!!'
+        })
     //render location table ITP on click go to location & delete
 }
 
@@ -72,7 +76,8 @@ function onGetUserPos() {
 }
 
 function onDelete(locIdx) {
-    deleteLocation(locIdx)
+    locService.deleteLocation(locIdx)
+    onGetLocs()
 }
 
 function onPanTo(lat, lng) {
@@ -93,12 +98,12 @@ function onSearch(ev) {
 
 }
 
-function onCopyUrl() {
-    let copyText = new URLSearchParams(window.location.search);
-    const center = { lat: 02, lng: 03 }
-    copyText += `?lat=${center.lat}&lng=${center.lng}`
-    document.execCommand('copy', false, copyText)
-}
+// function onCopyUrl() {
+//     let copyText = new URLSearchParams(window.location.search);
+//     const center = { lat: 02, lng: 03 }
+//     copyText += `?lat=${center.lat}&lng=${center.lng}`
+//     document.execCommand('copy', false, copyText)
+// }
 
  // copy link ex 10
 

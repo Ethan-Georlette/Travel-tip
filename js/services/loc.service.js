@@ -7,6 +7,7 @@ export const locService = {
     getLocs,
     setLocations,
     getSearchedLoc,
+    deleteLocation
 }
 
 const KEY = 'locsDB'
@@ -22,9 +23,8 @@ function getLocs() {
         storageService.save(KEY, locs)
     }
     return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(storageService.load(KEY));
-        }, 2000)
+        if (!locs.length) reject();
+        resolve(storageService.load(KEY));
     });
 }
 
@@ -66,3 +66,9 @@ function getPosAdress(lat, lng) {
 
 
 //save to local storage
+
+function deleteLocation(locIdx) {
+    let idx = locs.findIndex(loc => loc.id === locIdx);
+    locs.splice(idx, 1)
+    storageService.save(KEY, locs)
+}
