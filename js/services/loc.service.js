@@ -36,7 +36,7 @@ function setLocations(location) {
                 name: prompt('enter location title'),
                 lat: stringLoc.lat,
                 lng: stringLoc.lng,
-                adress:res,
+                adress: res,
                 cratedAt: Date.now()
             }
             locs.push(locObj)

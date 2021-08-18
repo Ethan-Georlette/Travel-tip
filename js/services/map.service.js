@@ -1,5 +1,5 @@
-import {storageService} from './storage.service.js' 
-import {locService} from './loc.service.js' 
+import { storageService } from './storage.service.js'
+import { locService } from './loc.service.js'
 
 export const mapService = {
     initMap,
@@ -20,14 +20,14 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 center: { lat, lng },
                 zoom: 15
             })
-            gMap.addListener("click",onMapClick)
+            gMap.addListener("click", onMapClick)
             console.log('Map!', gMap);
         })
 }
 
-function addMarker(lat,lng) {
+function addMarker(lat, lng) {
     var marker = new google.maps.Marker({
-        position: {lat,lng},
+        position: { lat, lng },
         map: gMap,
         title: 'Hello World!'
     });
@@ -36,7 +36,7 @@ function addMarker(lat,lng) {
 
 function panTo(lat, lng) {
     var laLatLng = new google.maps.LatLng(lat, lng);
-    gMap.zoom=15;
+    gMap.zoom = 15;
     gMap.panTo(laLatLng);
 }
 
@@ -51,7 +51,7 @@ function onMapClick(ev) {
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
-    const API_KEY = 'AIzaSyC4C-BtvOg1KbRq95MtG3L6tcJV99ID22w'; 
+    const API_KEY = 'AIzaSyC4C-BtvOg1KbRq95MtG3L6tcJV99ID22w';
     var elGoogleApi = document.createElement('script');
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
     elGoogleApi.async = true;

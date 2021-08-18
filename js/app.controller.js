@@ -43,6 +43,10 @@ function onGetLocs() {
                     <tr>
                         <td>${idx + 1}</td>
                         <td>${loc.name}</td>
+                        <td>id: ${idx + 1}</td>
+                        <td>Location name: ${loc.name}</td>
+                        <td>'Adress: '${loc.adress}</td>
+                        <td>'Location: ' ${loc.lat, loc.lng}</td>
                         <td onClick="onPanTo(${loc.lat},${loc.lng})">GO</td>
                         <td onclick="onDelete(${loc.id})">delete</td>
                     </tr>
@@ -67,6 +71,10 @@ function onGetUserPos() {
         })
 }
 
+function onDelete(locIdx) {
+    deleteLocation(locIdx)
+}
+
 function onPanTo(lat, lng) {
     console.log('Panning the Map');
     mapService.panTo(lat, lng);
@@ -87,7 +95,7 @@ function onSearch(ev) {
 
 function onCopyUrl() {
     let copyText = new URLSearchParams(window.location.search);
-    const center = {lat:02,lng:03}
+    const center = { lat: 02, lng: 03 }
     copyText += `?lat=${center.lat}&lng=${center.lng}`
     document.execCommand('copy', false, copyText)
 }
