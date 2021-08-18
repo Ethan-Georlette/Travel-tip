@@ -23,6 +23,7 @@ function onInit() {
     }
     prm.then(() => {
         console.log('Map is ready');
+        renderWeather();
     })
         .catch((err) => console.log('Error: cannot init map', err));
     // weatherService.initWeather();
@@ -75,6 +76,7 @@ function onGetUserPos() {
                 `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`
             mapService.panTo(pos.coords.latitude, pos.coords.longitude);
             mapService.addMarker(pos.coords.latitude, pos.coords.longitude);
+            renderWeather()
         })
         .catch(err => {
             console.log('err!!!', err);
@@ -90,6 +92,7 @@ function onPanTo(lat, lng) {
     console.log('Panning the Map');
     mapService.panTo(lat, lng);
     mapService.addMarker(lat, lng);
+    renderWeather();
 }
 
 function onSearch(ev) {
@@ -100,6 +103,7 @@ function onSearch(ev) {
             console.log(res);
             mapService.panTo(res.lat, res.lng);
             mapService.addMarker(res.lat, res.lng);
+            renderWeather();
         })
 
 }
@@ -132,4 +136,15 @@ function copyTextToClipboard(text) {
 
 function renderWeather() {
     weatherService.getposWeather(mapService.getMapPos())
+    .then(res=>{
+        console.log(res);
+        const strHtml=`
+        <h4>Weather today</h4>
+        <img src="http://openweathermap.org/img/wn/${res.icon}@2x.png">
+        <h7>${res.title}</h7>
+        <p>${res.description}</p>
+        <p><span class="weather-loc">${res.loc}</span></p>
+        <p>It is:${res.temp}℃</p>`
+        document.querySelector('.weather-container').innerHTML=strHtml;
+    })
 }
