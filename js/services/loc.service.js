@@ -36,7 +36,7 @@ function setLocations(location) {
                 name: prompt('enter location title'),
                 lat: stringLoc.lat,
                 lng: stringLoc.lng,
-                adress: res,
+                adress:res,
                 cratedAt: Date.now()
             }
             locs.push(locObj)
@@ -52,6 +52,7 @@ function getSearchedLoc(str) {
         })
         .catch(console.log)
 }
+
 function getPosAdress(lat, lng) {
     return fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyCePfEK3bXc96ayT5UdPTba5hsEXq2xydE`)
         .then(res => res.json())
@@ -65,10 +66,3 @@ function getPosAdress(lat, lng) {
 
 
 //save to local storage
-
-function deleteLocation(locIdx) {
-    let idx = locs.findIndex(loc => loc.id === locIdx)
-
-    locs.splice(idx, 0)
-
-}
