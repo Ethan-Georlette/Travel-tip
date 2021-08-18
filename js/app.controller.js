@@ -8,20 +8,24 @@ window.onGetLocs = onGetLocs;
 window.onGetUserPos = onGetUserPos;
 window.onSearch = onSearch;
 window.onDelete = onDelete;
-// window.onCopyUrl = onCopyUrl;
+window.onCopyUrl = onCopyUrl;
 
 function onInit() {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
     console.log(params);
-    mapService.initMap()
-        .then(() => {
-            console.log('Map is ready');
-        })
+    if (params.lat || params.lng) {
+        console.log('here');
+        var prm = mapService.initMap(params.lat, params.lng)
+    } else {
+        prm = mapService.initMap()
+    }
+    prm.then(() => {
+        console.log('Map is ready');
+    })
         .catch((err) => console.log('Error: cannot init map', err));
     // weatherService.initWeather();
 }
-
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
 function getPosition() {
     console.log('Getting Pos');
@@ -98,13 +102,28 @@ function onSearch(ev) {
 
 }
 
-// function onCopyUrl() {
-//     let copyText = new URLSearchParams(window.location.search);
-//     const center = { lat: 02, lng: 03 }
-//     copyText += `?lat=${center.lat}&lng=${center.lng}`
-//     document.execCommand('copy', false, copyText)
-// }
+function onCopyUrl() {
 
- // copy link ex 10
+    var center = mapService.getMapPos().toJSON();
+    const copyText = `https://ethan-georlette.github.io/Travel-tip/index.html?lat=${center.lat}&lng=${center.lng}`
+    copyTextToClipboard(copyText);
+}
+// copy link ex 10
+// add weather
+function copyTextToClipboard(text) {
+    var textArea = document.createElement("textarea");
+    textArea.value = text
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
 
- // add weather
+    try {
+        var successful = document.execCommand('copy');
+        var msg = successful ? 'successful' : 'unsuccessful';
+        console.log('Copying text command was ' + msg);
+    } catch (err) {
+        console.log('Oops, unable to copy');
+    }
+
+    document.body.removeChild(textArea);
+}

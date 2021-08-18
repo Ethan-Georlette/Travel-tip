@@ -5,19 +5,18 @@ export const mapService = {
     initMap,
     addMarker,
     panTo,
+    getMapPos,
 
 }
-
 var gMap;
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
-    console.log('InitMap');
     return _connectGoogleApi()
         .then(() => {
             console.log('google available');
             gMap = new google.maps.Map(
                 document.querySelector('#map'), {
-                center: { lat, lng },
+                center: { lat:parseFloat(lat),lng:parseFloat(lng) },
                 zoom: 15
             })
             gMap.addListener("click", onMapClick)
@@ -47,6 +46,10 @@ function onMapClick(ev) {
     //TODO save location 
     // {id, name, lat, lng, weather, createdAt, updatedAt}
     //+render table save to storage
+}
+
+function getMapPos(){
+    return gMap.getCenter();
 }
 
 function _connectGoogleApi() {
