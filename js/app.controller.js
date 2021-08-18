@@ -52,11 +52,10 @@ function onGetLocs() {
                         <td>${idx + 1}</td>
                         <td>${loc.name}</td>
                         <td>id: ${idx + 1}</td>
-                        <td>Location name: ${loc.name}</td>
-                        <td>'Adress: '${loc.adress}</td>
-                        <td>'Location: ' ${loc.lat, loc.lng}</td>
-                        <td onClick="onPanTo(${loc.lat},${loc.lng})">GO</td>
-                        <td onclick="onDelete(${loc.id})">delete</td>
+                        <td>Adress: ${loc.adress}</td>
+                        <td>Location:  ${loc.lat, loc.lng}</td>
+                        <td onClick="onPanTo(${loc.lat},${loc.lng})"><a class="myButton1">GO</a></td>
+                        <td onclick="onDelete(${loc.id})"><a class="myButton">delete</a></td>
                     </tr>
                 </table>`
             }).join('')
@@ -136,15 +135,15 @@ function copyTextToClipboard(text) {
 
 function renderWeather() {
     weatherService.getposWeather(mapService.getMapPos())
-    .then(res=>{
-        console.log(res);
-        const strHtml=`
+        .then(res => {
+            console.log(res);
+            const strHtml = `
         <h4>Weather today</h4>
         <img src="http://openweathermap.org/img/wn/${res.icon}@2x.png">
         <h7>${res.title}</h7>
         <p>${res.description}</p>
         <p><span class="weather-loc">${res.loc}</span></p>
         <p>It is:${res.temp}℃</p>`
-        document.querySelector('.weather-container').innerHTML=strHtml;
-    })
+            document.querySelector('.weather-container').innerHTML = strHtml;
+        })
 }
