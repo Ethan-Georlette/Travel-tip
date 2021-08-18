@@ -87,7 +87,7 @@ function onSearch(ev) {
 
 function onCopyUrl() {
     let copyText = new URLSearchParams(window.location.search);
-    const center = getPosition()
+    const center = {lat:02,lng:03}
     copyText += `?lat=${center.lat}&lng=${center.lng}`
     document.execCommand('copy', false, copyText)
 }
