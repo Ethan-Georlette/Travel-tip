@@ -13,7 +13,7 @@ function onInit() {
         .then(() => {
             console.log('Map is ready');
         })
-        .catch((err) => console.log('Error: cannot init map',err));
+        .catch((err) => console.log('Error: cannot init map', err));
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
