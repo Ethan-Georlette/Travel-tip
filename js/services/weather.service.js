@@ -8,10 +8,10 @@ function getposWeather(pos) {
         .then(res => res.json())
         .then(res => {
             return {
-                title:res.weather[0].main,
-                description:res.weather[0].description,
+                title: res.weather[0].main,
+                description: res.weather[0].description,
                 //weather[0]?
-                temp:(parseFloat(res.main.temp)-32)*0.5556
+                temp: (parseFloat(res.main.temp) - 32) * 0.5556
             }
         })
         .catch(console.log)

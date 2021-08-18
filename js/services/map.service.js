@@ -16,7 +16,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             console.log('google available');
             gMap = new google.maps.Map(
                 document.querySelector('#map'), {
-                center: { lat:parseFloat(lat),lng:parseFloat(lng) },
+                center: { lat: parseFloat(lat), lng: parseFloat(lng) },
                 zoom: 15
             })
             gMap.addListener("click", onMapClick)
@@ -48,7 +48,7 @@ function onMapClick(ev) {
     //+render table save to storage
 }
 
-function getMapPos(){
+function getMapPos() {
     return gMap.getCenter().toJSON();
 }
 
