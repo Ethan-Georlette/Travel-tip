@@ -1,5 +1,6 @@
 import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
+import { weatherService } from './services/weather.service.js'
 
 window.onload = onInit;
 window.onAddMarker = onAddMarker;
@@ -14,18 +15,19 @@ function onInit() {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
     console.log(params);
-    if(params.lat||params.lng){
+    if (params.lat || params.lng) {
         console.log('here');
-        var prm=mapService.initMap(params.lat,params.lng)
-    }else{
-     prm=mapService.initMap()
+        var prm = mapService.initMap(params.lat, params.lng)
+    } else {
+        prm = mapService.initMap()
     }
     prm.then(() => {
         console.log('Map is ready');
     })
-    .catch((err) => console.log('Error: cannot init map', err));
-    // weatherService.initWeather();
+        .catch((err) => console.log('Error: cannot init map', err));
+    weatherService.initWeather();
 }
+
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
 function getPosition() {
     console.log('Getting Pos');
@@ -59,7 +61,7 @@ function onGetLocs() {
             }).join('')
             document.querySelector('.locs').innerHTML = strHtml;
         })
-        .catch(err => {
+        .catch(() => {
             document.querySelector('.locs').innerHTML = 'no locations!!'
         })
     //render location table ITP on click go to location & delete
@@ -71,8 +73,8 @@ function onGetUserPos() {
             console.log('User position is:', pos.coords);
             document.querySelector('.user-pos').innerText =
                 `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`
-            mapService.panTo(pos.coords.latitude,pos.coords.longitude);
-            mapService.addMarker(pos.coords.latitude, pos.coords.longitud);
+            mapService.panTo(pos.coords.latitude, pos.coords.longitude);
+            mapService.addMarker(pos.coords.latitude, pos.coords.longitude);
         })
         .catch(err => {
             console.log('err!!!', err);
@@ -103,27 +105,31 @@ function onSearch(ev) {
 }
 
 function onCopyUrl() {
-    
-    var center = mapService.getMapPos().toJSON();
+
+    var center = mapService.getMapPos();
     const copyText = `https://ethan-georlette.github.io/Travel-tip/index.html?lat=${center.lat}&lng=${center.lng}`
     copyTextToClipboard(copyText);
 }
- // copy link ex 10
- // add weather
- function copyTextToClipboard(text) {
+// copy link ex 10
+// add weather
+function copyTextToClipboard(text) {
     var textArea = document.createElement("textarea");
     textArea.value = text
     document.body.appendChild(textArea);
     textArea.focus();
     textArea.select();
-  
+
     try {
-      var successful = document.execCommand('copy');
-      var msg = successful ? 'successful' : 'unsuccessful';
-      console.log('Copying text command was ' + msg);
+        var successful = document.execCommand('copy');
+        var msg = successful ? 'successful' : 'unsuccessful';
+        console.log('Copying text command was ' + msg);
     } catch (err) {
-      console.log('Oops, unable to copy');
+        console.log('Oops, unable to copy');
     }
-  
+
     document.body.removeChild(textArea);
-  }
+}
+
+function renderWeather(){
+    weatherService.getposWeather(mapService.getMapPos())
+}
