@@ -1,7 +1,8 @@
 import { storageService } from "./storage.service.js";
 
 export const locService = {
-    getLocs
+    getLocs,
+    getLocations
 }
 
 const KEY = 'locsDB'
@@ -13,6 +14,9 @@ const locs = [
 ]
 
 function getLocs() {
+    if (!storageService.load(KEY)) {
+        storageService.save(KEY, locs)
+    }
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve(storageService.load(KEY));
@@ -29,13 +33,14 @@ function getLocations(location) {
         cratedAt: Date.now()
     }
 
-    if (!storageService.load(KEY)) {
-        storageService.save(KEY, locs)
-    }
-    else {
-        locs.push(locObj)
-        storageService.save(KEY, locs)
-    }
+    // if (!storageService.load(KEY)) {
+    //     locs.push(locObj)
+    //     storageService.save(KEY, locs)
+    // }
+    // else {
+    locs.push(locObj)
+    storageService.save(KEY, locs)
+    // }
 }
 
 

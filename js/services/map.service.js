@@ -1,4 +1,5 @@
-
+import {storageService} from './storage.service.js' 
+import {locService} from './loc.service.js' 
 
 export const mapService = {
     initMap,
@@ -8,7 +9,6 @@ export const mapService = {
 }
 
 var gMap;
-
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
     console.log('InitMap');
@@ -20,7 +20,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 center: { lat, lng },
                 zoom: 15
             })
-            gMap.addListener("click", onMapClick)
+            gMap.addListener("click",onMapClick)
             console.log('Map!', gMap);
         })
 }
@@ -41,10 +41,8 @@ function panTo(lat, lng) {
 
 function onMapClick(ev) {
     console.log(ev.latLng);
-    // gMap.panTo(ev.latLng);
     const latLng = ev.latLng
-    getLocation(latLng)
-
+    locService.getLocations(latLng)
     //TODO save location 
     // {id, name, lat, lng, weather, createdAt, updatedAt}
     //+render table save to storage
@@ -52,7 +50,7 @@ function onMapClick(ev) {
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
-    const API_KEY = 'AIzaSyC4C-BtvOg1KbRq95MtG3L6tcJV99ID22w';
+    const API_KEY = 'AIzaSyC4C-BtvOg1KbRq95MtG3L6tcJV99ID22w'; 
     var elGoogleApi = document.createElement('script');
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
     elGoogleApi.async = true;
