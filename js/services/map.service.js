@@ -49,7 +49,7 @@ function onMapClick(ev) {
 }
 
 function getMapPos(){
-    return gMap.getCenter();
+    return gMap.getCenter().toJSON();
 }
 
 function _connectGoogleApi() {
