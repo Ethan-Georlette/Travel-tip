@@ -17,3 +17,4 @@ function getLocs() {
 }
 
 
+//save to local storage

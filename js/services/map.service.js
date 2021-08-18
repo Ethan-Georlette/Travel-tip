@@ -20,25 +20,6 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 zoom: 15
             })
             gMap.addListener("click", onMapClick)
-            // let infoWindow = new google.maps.InfoWindow({
-                //     content: "Click the map to get Lat/Lng!",
-                //     position: myLatlng,
-                //   });
-                //   infoWindow.open(map);
-                //   // Configure the click listener.
-                //   map.addListener("click", (mapsMouseEvent) => {
-                //     // Close the current InfoWindow.
-                //     infoWindow.close();
-                //     // Create a new InfoWindow.
-                //     infoWindow = new google.maps.InfoWindow({
-                //       position: mapsMouseEvent.latLng,
-                //     });
-                //     infoWindow.setContent(
-                //       JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
-                //     );
-                //     infoWindow.open(map);
-                //   });
-            // }
             console.log('Map!', gMap);
         })
 }
@@ -59,11 +40,14 @@ function panTo(lat, lng) {
 
 function onMapClick(ev) {
     console.log(ev.latLng);
+    //TODO save location 
+    // {id, name, lat, lng, weather, createdAt, updatedAt}
+    //+render table save to storage
 }
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
-    const API_KEY = 'AIzaSyC4C-BtvOg1KbRq95MtG3L6tcJV99ID22w'; //TODO: Enter your API Key
+    const API_KEY = 'AIzaSyC4C-BtvOg1KbRq95MtG3L6tcJV99ID22w'; 
     var elGoogleApi = document.createElement('script');
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
     elGoogleApi.async = true;
