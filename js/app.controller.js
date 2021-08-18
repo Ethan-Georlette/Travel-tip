@@ -7,7 +7,10 @@ window.onPanTo = onPanTo;
 window.onGetLocs = onGetLocs;
 window.onGetUserPos = onGetUserPos;
 window.onSearch = onSearch;
+<<<<<<< HEAD
 window.onCopyUrl = onCopyUrl;
+=======
+>>>>>>> 87a17048d9a52d7eab00527d719ddd49c71fd831
 
 function onInit() {
     const urlSearchParams = new URLSearchParams(window.location.search);
@@ -41,8 +44,15 @@ function onGetLocs() {
                 console.log(loc);
                 return `<table>
                     <tr>
+<<<<<<< HEAD
                         <td>${idx + 1}</td>
                         <td>${loc.name}</td>
+=======
+                        <td>id: ${idx + 1}</td>
+                        <td>Location name: ${loc.name}</td>
+                        <td>'Adress: '${loc.adress}</td>
+                        <td>'Location: ' ${loc.lat, loc.lng}</td>
+>>>>>>> 87a17048d9a52d7eab00527d719ddd49c71fd831
                         <td onClick="onPanTo(${loc.lat},${loc.lng})">GO</td>
                         <td onclick="onDelete(${loc.id})">delete</td>
                     </tr>
@@ -67,6 +77,13 @@ function onGetUserPos() {
         })
 }
 
+<<<<<<< HEAD
+=======
+function onDelete(locIdx) {
+    deleteLocation(locIdx)
+}
+
+>>>>>>> 87a17048d9a52d7eab00527d719ddd49c71fd831
 function onPanTo(lat, lng) {
     console.log('Panning the Map');
     mapService.panTo(lat, lng);
@@ -82,8 +99,11 @@ function onSearch(ev) {
             mapService.panTo(res.lat, res.lng);
             mapService.addMarker(res.lat, res.lng);
         })
+<<<<<<< HEAD
 
 }
+=======
+>>>>>>> 87a17048d9a52d7eab00527d719ddd49c71fd831
 
 function onCopyUrl() {
     let copyText = new URLSearchParams(window.location.search);

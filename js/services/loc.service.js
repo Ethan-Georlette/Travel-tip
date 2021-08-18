@@ -67,7 +67,7 @@ function getPosAdress(lat, lng) {
 //save to local storage
 
 function deleteLocation(locIdx) {
-    let idx = locs.findIndex(loc => loc.id == locIdx)
+    let idx = locs.findIndex(loc => loc.id === locIdx)
 
     locs.splice(idx, 0)
 
