@@ -7,7 +7,6 @@ export const mapService = {
 
 }
 
-import { storageService } from './storage.service.js'
 var gMap;
 
 
