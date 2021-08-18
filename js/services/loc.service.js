@@ -1,11 +1,12 @@
 import { storageService } from "./storage.service.js";
-// https://maps.googleapis.com/maps/api/geocode/json?[SEARCH]&key=AIzaSyCePfEK3bXc96ayT5UdPTba5hsEXq2xydE
+// https://maps.googleapis.com/maps/api/geocode/json?latlng=32.047104,34.832384&key=AIzaSyCePfEK3bXc96ayT5UdPTba5hsEXq2xydE
 // SEARCH:
-// adress=adress
+// address=adress
 //latlng=lat,lng
 export const locService = {
     getLocs,
-    setLocations
+    setLocations,
+    getSearchedLoc,
 }
 
 const KEY = 'locsDB'
@@ -29,16 +30,38 @@ function getLocs() {
 
 function setLocations(location) {
     var stringLoc = location.toJSON()
-    const locObj = {
-        name: prompt('enter location title'),
-        lat: stringLoc.lat,
-        lng: stringLoc.lng,
-        cratedAt: Date.now()
-    }
-    locs.push(locObj)
-    storageService.save(KEY, locs)
+    getPosAdress(stringLoc.lat, stringLoc.lng)
+        .then(res => {
+            const locObj = {
+                name: prompt('enter location title'),
+                lat: stringLoc.lat,
+                lng: stringLoc.lng,
+                adress:res,
+                cratedAt: Date.now()
+            }
+            locs.push(locObj)
+            storageService.save(KEY, locs)
+        })
 }
 
+function getSearchedLoc(str) {
+    return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${str}&key=AIzaSyCePfEK3bXc96ayT5UdPTba5hsEXq2xydE`)
+        .then(res => res.json())
+        .then(res => {
+            return res.results[0].geometry.location
+        })
+        .catch(console.log)
+}
+function getPosAdress(lat, lng) {
+    return fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyCePfEK3bXc96ayT5UdPTba5hsEXq2xydE`)
+        .then(res => res.json())
+        .then(res => {
+            return res.results[0].formatted_address
+        })
+        .catch(console.log)
+}
+// get from search a position
+//get from latlng an adress
 
 
 //save to local storage

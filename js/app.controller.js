@@ -14,6 +14,7 @@ function onInit() {
             console.log('Map is ready');
         })
         .catch((err) => console.log('Error: cannot init map', err));
+        // weatherService.initWeather();
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
@@ -69,6 +70,15 @@ function onPanTo(lat,lng) {
 }
 
 function onSearch(ev){
+    ev.preventDefault();
+    const elInputSearch = document.querySelector('input[name=search]');
+    locService.getSearchedLoc(elInputSearch.value)
+    .then(res=>{
+        console.log(res);
+        mapService.panTo(res.lat,res.lng);
+        mapService.addMarker(res.lat,res.lng);
+    })
+
 }
 // search that go to searched location geo code API
 
