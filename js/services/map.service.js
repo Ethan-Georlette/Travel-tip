@@ -20,7 +20,6 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 zoom: 15
             })
             gMap.addListener("click", onMapClick)
-            console.log('Map!', gMap);
         })
 }
 
@@ -40,12 +39,8 @@ function panTo(lat, lng) {
 }
 
 function onMapClick(ev) {
-    console.log(ev.latLng);
     const latLng = ev.latLng
     locService.setLocations(latLng)
-    //TODO save location 
-    // {id, name, lat, lng, weather, createdAt, updatedAt}
-    //+render table save to storage
 }
 
 function getMapPos() {

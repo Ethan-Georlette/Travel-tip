@@ -12,7 +12,6 @@ function getposWeather(pos) {
                 title: res.weather[0].main,
                 description: res.weather[0].description,
                 icon: res.weather[0].icon,
-                //weather[0]?
                 temp: res.main.temp
             }
         })
