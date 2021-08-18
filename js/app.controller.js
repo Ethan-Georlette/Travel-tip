@@ -34,6 +34,7 @@ function onGetLocs() {
             console.log('Locations:', locs)
             document.querySelector('.locs').innerText = JSON.stringify(locs)
         })
+        //render location table ITP on click go to location & delete
 }
 
 function onGetUserPos() {
@@ -46,9 +47,16 @@ function onGetUserPos() {
         .catch(err => {
             console.log('err!!!', err);
         })
+        // pan the map to user location
 }
 
 function onPanTo() {
     console.log('Panning the Map');
     mapService.panTo(35.6895, 139.6917);
 }
+
+// search that go to searched location geo code API
+
+ // copy link ex 10
+
+ // add weather
